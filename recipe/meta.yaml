@@ -1,0 +1,45 @@
+{% set name = "ecto" %}
+{% set version = "0.6.12" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  fn: ecto-{{ version }}.tar.gz
+  url: https://github.com/plasmodic/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: ad59258d91755e3795225a7d876538a97de7138ede99471debf8dfecc90861f4
+  patches:
+    - build.patch
+
+build:
+    number: 0
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - cmake
+    - ninja
+    - catkin
+    - python
+  host:
+    - gtest
+    - nose
+    - boost
+    - python
+
+test:
+  requires:
+    - python
+    - boost
+  imports:
+    - ecto.gui
+
+about:
+  home: http://plasmodic.github.io/ecto/
+  summary: Ecto - A C++/Python Computation Graph Framework
+
+extra:
+  recipe-maintainers:
+    - v-turin

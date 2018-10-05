@@ -1,0 +1,48 @@
+diff --git a/include/ecto/python/streambuf.hpp b/include/ecto/python/streambuf.hpp
+index 3293b34..a384ba1 100644
+--- a/include/ecto/python/streambuf.hpp
++++ b/include/ecto/python/streambuf.hpp
+@@ -294,7 +294,7 @@ class streambuf : public std::basic_streambuf<char>
+       read_buffer = py_read(buffer_size);
+       char *read_buffer_data;
+       bp::ssize_t py_n_read;
+-      if (PyString_AsStringAndSize(read_buffer.ptr(),
++      if (PyBytes_AsStringAndSize(read_buffer.ptr(),
+                                    &read_buffer_data, &py_n_read) == -1) {
+         setg(0, 0, 0);
+         throw std::invalid_argument(
+diff --git a/src/lib/plasm/impl.hpp b/src/lib/plasm/impl.hpp
+index b6620d7..f15528d 100644
+--- a/src/lib/plasm/impl.hpp
++++ b/src/lib/plasm/impl.hpp
+@@ -29,7 +29,7 @@
+ #pragma once
+ 
+ #include <ecto/plasm.hpp>
+-#include <boost/tr1/unordered_map.hpp>
++#include <boost/unordered_map.hpp>
+ 
+ #include <ecto/graph/types.hpp>
+ 
+diff --git a/src/lib/util.cpp b/src/lib/util.cpp
+index a568e6c..89b1c17 100644
+--- a/src/lib/util.cpp
++++ b/src/lib/util.cpp
+@@ -27,7 +27,7 @@
+ // 
+ #include <vector>
+ #include <iostream>
+-#include <boost/tr1/unordered_map.hpp>
++#include <boost/unordered_map.hpp>
+ #include <ecto/util.hpp>
+ #include <ecto/except.hpp>
+ #if !defined(_WIN32)
+@@ -130,7 +130,7 @@ namespace ecto
+   private:
+     type_mapping() { }
+     
+-    typedef std::tr1::unordered_map<std::string, std::string> dict_t;
++    typedef boost::unordered_map<std::string, std::string> dict_t;
+     dict_t m;
+   };
+ 
