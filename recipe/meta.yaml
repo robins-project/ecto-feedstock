@@ -21,7 +21,7 @@ requirements:
     - {{ compiler("cxx") }}
     - cmake
     - ninja
-    - catkin
+    - catkin {{ catkin }}
     - python
   host:
     - gtest
